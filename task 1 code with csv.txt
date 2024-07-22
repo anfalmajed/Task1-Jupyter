@@ -1,0 +1,17 @@
+import pandas as pd
+import chardet
+file_path = "C:\\Users\\User\\Downloads\\Employee Sample Data - Copy (1).csv"
+with open(file_path, 'rb') as f:
+    result=chardet.detect(f.read())
+    print(result)
+    df = pd.read_csv(file_path, encoding=result['encoding'])
+	{'encoding': 'UTF-16', 'confidence': 1.0, 'language': ''}
+df.drop_duplicates(inplace = True)
+df.iloc[:5]= 'not found'
+temp_column=pd.to_numeric(df['Annual Salary'], error='coerce')
+max_salary_index=temp_column.idxmax()
+max_salary=temp_column.max()
+max_salary_row=df.loc[max_salary_index]
+print(f"The largest salary={max_salary} \n \n")
+print(max_salary_row)
+df.to_csv("C:\\Users\\User\\Downloads\\Employee with csv.csv")

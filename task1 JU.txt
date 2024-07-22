@@ -1,0 +1,22 @@
+import pandas as pd
+df = pd.read_excel("Employee Sample Data - Copy.xlsx")
+df.drop_duplicates(inplace = True)
+df["City"].fillna('United States', inplace = True)
+df["Ethnicity"].fillna('Caucasian', inplace = True)
+df["Job Title"].iloc[:5]="Computer Systems Manager"
+df["Department"].iloc[:5]="IT"
+df["Business Unit"].iloc[:5]="Manufacturing"
+df["Ethnicity"].iloc[:5]="Caucasian"
+df["Age"].iloc[:5]=50
+df["Exit Date"].iloc[:5]="10/16/2021"
+df["City"].iloc[:5]="Phoenix"
+df["Country"].iloc[:5]="United States"
+df["Bonus %"].iloc[:5]="15%"
+df["Annual Salary"].iloc[:5]="$999,75"
+temp_column=pd.to_numeric(df['Annual Salary'], error='coerce')
+max_salary_index=temp_column.idxmax()
+max_salary=temp_column.max()
+max_salary_row=df.loc[max_salary_index]
+print(f"The largest salary={max_salary} \n \n")
+print(max_salary_row)
+df.to_excel("Employee Sample Data an.xlsx")
